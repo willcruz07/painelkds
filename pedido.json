@@ -1,0 +1,28 @@
+{
+    "pedido": "000134",
+    "status": "normal",  
+    "server": "PAT-1225",    
+    "usuario": "Wellen Cruz",
+    "destino": "Mesa 03",
+    "observacao": "Observacao do pedido",
+    "itens": {
+        "item1": {
+            "id": "",
+            "nome": "Batata Frita", 
+            "quantidade": "2",
+            "observacao": ""            
+        },
+        "item2": {
+            "id": "",
+            "nome": "X-Tudo",
+            "quantidade": "1",
+            "observacao": "Sem alface"
+        }, 
+        "item3": {
+            "id": "",
+            "nome": "Suco de uva",
+            "quantidade": "2",
+            "observacao": "Com gelo"
+        }    
+    }
+}
