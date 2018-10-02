@@ -81,6 +81,37 @@ body {
   margin-bottom: 0px;
 }
 
-.check-focus {
-  background-color: red; 
+div.label {
+  margin: 0;
+  padding: 0;  
+}
+
+ul.checkbox {
+  margin: 0;
+  padding: 0;
+  margin-left: 20px;
+  list-style: none;
+}
+
+ul.checkbox li input { 
+  margin-right: .25em; 
+} 
+
+ul.checkbox li {
+  border: 1px transparent solid;
+}
+
+ul.checkbox li:hover,
+ul.checkbox li.focus {
+  background-color: lightblue;
+  border: 1px gray solid;  
+}
+
+input[type="checkbox"]:focus {
+  background-color: lightblue;
+  border: 1px gray solid;  
+}
+
+.fundo {
+  background-color: lightblue;
 }

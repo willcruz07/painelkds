@@ -24,7 +24,7 @@ function lerArquivoJSON (io) {
                 throw 'Erro ao ler o arquivo: ' + nomeArquivo;
             };            
             enviarArquivoparaoFrontEnd(io, data);            
-            removerArquivodaPasta(diretorioIntegracao + nomeArquivo);             
+            removerArquivodaPasta(diretorioIntegracao + nomeArquivo);               
         });
     });
 };
@@ -49,6 +49,7 @@ function removerArquivodaPasta (dirArquivo) {
         if (err) {
             console.log('Não foi possível excluir o arquivo');
         };
+        console.log(dirArquivo);
         console.log('Deletado!');
     });
 };
