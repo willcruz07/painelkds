@@ -1,68 +1,48 @@
 function inserirPedido (pedido) {
-    let divCardText = ''; 
+    let divCardText = '';
+    let mesa = '';
+    let garcom = '';
+
+    if (pedido.destino == 0) 
+        mesa = `Balcão`
+    else 
+        mesa = `Mesa: ${pedido.destino}`;
+    
+    if (pedido.usuario !== 'Balcão')
+        garcom = pedido.usuario;
 
     $.each(pedido.itens, function (index, item) {
-        let observacao = '';              
+        let observacao = '';
 
         if (item.observacao !== '')
-            observacao = `<br><label class="form-check-label"> ${item.observacao}  </label>`
+            observacao = `<br> >> ${item.observacao}`;
 
-            divCardText += `<li><input type="checkbox" class="form-check-input" onfocus="adicionarfundo(e)" onfocusout="removerfundo(e)" name="${item.nome}" id="${item.id}" value="checkedValue"/> <label class="form-check-label"> ${item.quantidade} - ${item.nome}</label> ${observacao} </li>`;
+        divCardText += `<li>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="${item.nome}" id="${item.id}"/>
+                                <label for="${item.id}" class="custom-control-label"><span class="qtItem">${item.quantidade}</span> - <span class="nomeItem">${item.nome}</span>  <span class="obsItem">${observacao}</span></label>
+                            </div>
+                        </li>`;
+    });
 
-        // divCardText += `<div class="form-check">                        
-        //                     <ul class="checkbox">
-        //                     <label class="form-check-label">
-        //                         <input type="checkbox" class="form-check-input" name="${item.nome}" id="${item.id}" value="checkedValue">
-        //                         ${item.quantidade} - ${item.nome}
-        //                     </label>
-        //                     ${observacao}                        
-        //                     </ul>
-        //                 </div>`;
-    });        
-
-    $('.row').append(                
+    $('.teladePedidos').append(
         `<form>
             <div class="card text-white bg-secondary">
                 <div class="card-header ">
-                    <h5> Pedido ${pedido.pedido} </h5>                     
-                    <span class="spanLeft"> Mesa: ${pedido.destino} </span> 
-                    <span class="spanRight"> Hora: ${pedido.hora} </span>                       
+                    <h5>Pedido <span class="nrPedido">${pedido.pedido}</span></h5>
+                    <span class="spanLeft nrMesa">${mesa}</span>
+                    <span class="spanRight">Hora: <span class="hrPedido">${pedido.hora}</span></span>
                 </div>
                 <div class="card-body">
                     <div class="card-text">
-                        <div class="label">
-                            <ul class="checkbox">
-                                ${divCardText}
-                            </ul>
-                        </div>
+                        <ul class="checkbox">${divCardText}</ul>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <span class="garcom spanLeft"> ${pedido.usuario} </span>                    
-                    <span class="${pedido.index} spanRight"> ${pedido.tempoemTela} </span>                    
+                    <span class="spanLeft garcom">${garcom}</span>
+                    <span class="${pedido.index} spanRight tempoTela">${pedido.tempoemTela}</span>
                 </div>
             </div>
         </form>`
-    );    
-  
-    // $('.row').append(                
-    //     `<form>
-    //         <div class="card text-white bg-secondary">
-    //             <div class="card-header ">
-    //                 <h5> Pedido ${pedido.pedido} </h5>                     
-    //                 <span class="spanLeft"> Mesa: ${pedido.destino} </span> 
-    //                 <span class="spanRight"> Hora: ${pedido.hora} </span>                       
-    //             </div>
-    //             <div class="card-body">
-    //                 <div class="card-text">
-    //                     ${divCardText}
-    //                 </div>
-    //             </div>
-    //             <div class="card-footer">
-    //                 <span class="garcom spanLeft"> ${pedido.usuario} </span>                    
-    //                 <span class="${pedido.index} spanRight"> ${pedido.tempoemTela} </span>                    
-    //             </div>
-    //         </div>
-    //     </form>`
-    // );    
+    );
 };

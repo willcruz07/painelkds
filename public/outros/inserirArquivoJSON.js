@@ -1,35 +1,30 @@
-module.exports = function (io)  {
+module.exports = function (io) {
     const watch = require('node-watch');
+    let watcher = watch('./integracaoJSON', {recursive: true});
 
-    let watcher = watch('./integracaoJSON', {recursive: true});    
- 
     watcher.on('change', function (evt, name) {
-        if (evt == 'update') {                                                             
+        if (evt == 'update')
             lerArquivoJSON(io);
-        }
     });
     watcher.close();
 };
 
 function lerArquivoJSON (io) {
-    const fs = require('fs');    
+    const fs = require('fs');
     const diretorioIntegracao = "./integracaoJSON/";
-    
-    let verificardiretorioArquivos = fs.readdirSync(diretorioIntegracao);        
+    let verificardiretorioArquivos = fs.readdirSync(diretorioIntegracao);
 
     verificardiretorioArquivos.forEach(function (nomeArquivo) {
-        
-        fs.readFile(diretorioIntegracao + nomeArquivo, 'utf8', function (err, data) {            
-            if (err) {
+        fs.readFile(diretorioIntegracao + nomeArquivo, 'utf8', function (err, data) {
+            if (err)
                 throw 'Erro ao ler o arquivo: ' + nomeArquivo;
-            };            
-            enviarArquivoparaoFrontEnd(io, data);            
-            removerArquivodaPasta(diretorioIntegracao + nomeArquivo);               
+            enviarArquivoparaoFrontEnd(io, data);
+            removerArquivodaPasta(diretorioIntegracao + nomeArquivo);
         });
     });
 };
 
-function enviarArquivoparaoFrontEnd (io, data) {    
+function enviarArquivoparaoFrontEnd (io, data) {
     let pedido = JSON.parse(data)
     io.sockets.emit('enivoPedido', {
         hora: pedido.hora,
@@ -39,17 +34,19 @@ function enviarArquivoparaoFrontEnd (io, data) {
         usuario: pedido.usuario,
         destino: pedido.destino,
         observacao: pedido.observacao,
-        itens: pedido.itens
-    });    
+        itens: pedido.itens,
+        config: getConfig()
+    });
+};
+
+function getConfig () {
+    const fs = require('fs');
+    let arquivo = fs.readFileSync('./config.json', 'utf8');
+    let config = JSON.parse(arquivo);
+    return config;
 };
 
 function removerArquivodaPasta (dirArquivo) {
-    const fs = require('fs');        
-    fs.unlink(dirArquivo, function (err) {
-        if (err) {
-            console.log('Não foi possível excluir o arquivo');
-        };
-        console.log(dirArquivo);
-        console.log('Deletado!');
-    });
+    const fs = require('fs');
+    fs.unlinkSync(dirArquivo);
 };

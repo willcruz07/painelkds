@@ -7,39 +7,80 @@
     <title>KDS - Spice</title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">    
-    <link rel="stylesheet" href="/stylesheets/jquery-confirm.min.css">
+    <link rel="stylesheet" href="/stylesheets/jquery-confirm.min.css">    
     <link rel="shortcut icon" type="favicon" href="/images/spice.ico">  
-    <script src="/javascripts/jquery-3.3.1.min.js"></script>            
-    <script src="/javascripts/bootstrap.min.js"></script>        
-    <script src="/javascripts/jquery-confirm.min.js"></script>            
+    <script src="/javascripts/jquery-3.3.1.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/jquery-confirm.min.js"></script>    
 </head>
     <body>
         <header>
-            <nav class="navbar bg-dark navbar-dark">        
-                <img src="/images/logoSpiceBranco.png" alt="Logo Spice Aterdata">        
-                <form class="form-inline">                                                  
-                    <div class="input-group">                        
-                        <input type="text" name="pesquisar" value="" placeholder="Digite sua pesquisa" class="form-control">    
-                    </div>        
-                </form>
-            </nav>  
-        </header>    
+            <nav class="navbar bg-dark navbar-dark">
+                <img src="/images/logoSpiceBranco.png" alt="Logo Spice Aterdata">
+                <div class="menuConfig">
+                    <button type="button" class="btn btn-dark btnConfiguracao" data-toggle="modal" data-target="#configuracoes">
+                        <i><img src="/images/configuracoes.png" alt="Configurações"></i>
+                    </button>
+                    <button type="button" id="menu-toggle" class="btn btn-dark btnMenu">
+                        <i><img src="/images/menu.png" alt="Liberação de pedido"></i>                        
+                    </button>
+                </div>                
+            </nav>
+        </header>
+        <div id="page-content-wrapper">
         <main class="container-fluid">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 scroll">      
-                <div class="row">                                         
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 scroll">
+                <div class="row teladePedidos">
                 </div>
             </div>
-        </main>    
-        <footer class="footer">        
-            <div>            
-                <img class="logoAlterdata" src="/images/logo_alterdata.png" alt="Logo Alterdata">            
+        </main>
+        </div>
+        <footer class="footer">
+            <div class="logoAlterdata">
+                <img src="/images/logo_alterdata.png" alt="Logo Alterdata">
             </div>
-        </footer>        
+        </footer>
+
+        <!-- Modal de Configuração -->
+        <div class="modal fade" id="configuracoes" tabindex="-1" role="dialog" aria-label="configuracoesLabel" arial-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="configuracoesLabel">Configurações <img src="/images/configuracoesBlack.png" alt="Configurações"> </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span arial-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="tempoAlerta">
+                                        <label for="#tempoAlerta">Tempo de Alerta do pedido:</label>
+                                        <input type="time" class="form-control" id="tempoAlerta" step="1"/>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="tempoCritico">
+                                        <label for="#tempoCritico">Tempo Critico do Pedido:</label>
+                                        <input type="time" class="form-control" id="tempoCritico" step="1"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="button btn btn-success saveConfig" data-dismiss="modal">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
-    <script src="/socket.io/socket.io.js"></script>   
-    <script src="/javascripts/cronometro.js"></script>    
-    <script src="/javascripts/navegacaocard.js"></script>  
-    <script src="/javascripts/showmodal.js"></script>            
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/cronometro.js"></script>
+    <script src="/javascripts/navegacaocard.js"></script>
+    <script src="/javascripts/showmodal.js"></script>
     <script src="/javascripts/inserirPedido.js"></script>
     <script src="/javascripts/index.js"></script>
+    <script src="/javascripts/configPedido.js"></script>
 </html>
